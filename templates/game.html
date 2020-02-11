@@ -22,7 +22,7 @@
      {% endif %}
      
      <!--sprawdzenie poprawnosci kodu-->
-     {% if guess != [] %}
+     {% if guess %}
         
         {% set guess_count = guess | length %}
         {% set joinedList_count = joinedlist | length %}
@@ -40,6 +40,7 @@
 
         <div>{{ guess }}</div>
         <div>{{ joinedlist }}</div>   
+        <div>{{ answer }}</div> 
      {% endif %}
      
      <!--odszyfrowana gra-->
