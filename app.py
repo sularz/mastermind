@@ -33,43 +33,48 @@ def about():
 @app.route("/game", methods=['GET', 'POST'])
 def game_ready():
 
-    global game
-    while game:
-
+    guess = []
+    
+    if guess is None:
         form = AnswerForm()
         guess = list(request.form.get('answer_form'))
-        global attempts
-        attempts += 1
 
-        if attempts > 10:
-            game = False
-            #print('Koniec gry')
+    else:
+        global game
+        while game:
 
-        answer = []
-        global joinedlist
-        joinedlist = list(map(str, joinedlist)) #konwertuję do stringów, potrzebne przy sprawdzaniu cyfr
+            global attempts
+            attempts += 1
 
-            #sprawdzenie kolorów w odpowiedzi
-        for i in range(0, 7, 2):
-            if guess[i] == joinedlist[i]: #poprawny kolor i prawidłowe miejsce
-                answer.append("O")
-            elif guess[i] in joinedlist:	
-                #poprawny kolor, ale na złym miejscu
-                answer.append("V")
-            else: #zły kolor
-                answer.append("X")
-            
-            #sprawdzenie cyfr w odpowiedzi
-        for i in range(1, 8, 2):
-            if guess[i] == joinedlist[i]: #poprawna cyfra i prawidłowe miejsce
-                answer.append("O")
-            elif guess[i] in joinedlist:	
-                #poprawna cyfra, ale na złym miejscu
-                answer.append("V")
-            else: #zła cyfra
+            if attempts > 10:
+                game = False
+                    #print('Koniec gry')
+
+            answer = []
+            global joinedlist
+            joinedlist = list(map(str, joinedlist)) #konwertuję do stringów, potrzebne przy sprawdzaniu cyfr
+
+                    #sprawdzenie kolorów w odpowiedzi
+            for i in range(0, 7, 2):
+                if guess[i] == joinedlist[i]: #poprawny kolor i prawidłowe miejsce
+                    answer.append("O")
+                elif guess[i] in joinedlist:	
+                        #poprawny kolor, ale na złym miejscu
+                    answer.append("V")
+                else: #zły kolor
                     answer.append("X")
-	
-        return render_template('game.html', title='Game', form=form, guess=guess)
+                    
+                    #sprawdzenie cyfr w odpowiedzi
+            for i in range(1, 8, 2):
+                if guess[i] == joinedlist[i]: #poprawna cyfra i prawidłowe miejsce
+                    answer.append("O")
+                elif guess[i] in joinedlist:	
+                        #poprawna cyfra, ale na złym miejscu
+                    answer.append("V")
+                else: #zła cyfra
+                    answer.append("X")
+        
+    return render_template('game.html', title='Game', form=form)
 
 if __name__ == '__main__':
     app.run(debug=True)
