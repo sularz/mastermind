@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired, Length
 
 class AnswerForm(FlaskForm):
-    answer_form = StringField('Tutaj wpisz kod, hakerze!')
-    submit = SubmitField('Sprawdz!')
+    answer = StringField('answer', validators=[DataRequired(), Length(min=8, max=8)])
+    submit = SubmitField('submit')

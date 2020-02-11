@@ -1,47 +1,50 @@
 {% extends "layout.html" %}
+
 {% block content %}
     <div class="content-section">
         <form method="POST" action="">
             {{ form.hidden_tag() }}
             <fieldset class="form-group"> 
                 <legend class="border-bottom">Powodzenia!</legend>
-                <dir class="form-group">
-                    {{ form.answer_form.label(class="form-control-label") }}
-                    {{ form.answer_form(class="form-control form-control-lg") }}
-                </dir>
-                <dir class="form-group">
+                <div class="form-group">
+                    {{ form.answer.label(class="form-control-label") }}
+                    {{ form.answer(class="form-control form-control-lg") }}
+                </div>
+                <div class="form-group">
                     {{ form.submit(class="btn btn-outline-info") }}
-                </dir>                
+                </div>                
             </fieldset>
         </form>
     </div>
      <!-- koniec gry -->
-     {% if game_over ==True %}
+     {% if game_over == True %}
      <h2>Koniec gry!</h2> 
      {% endif %}
      
      <!--sprawdzenie poprawnosci kodu-->
-     {% if len(guess) != len(joinedlist) %}
-     <h2>'Twoja odpowiedz musi miec 4 cyfry i 4 litery. Przyklad: z4c5n6b9'</h2> 
-		
-     {% for i in [1, 3, 5, 7] %}:
-        {% if guess[i] not in numbers %}	
-		<h2>'Uzywasz niepoprawnych znakow'</h2>
-		{% endif %}		
-     {% endfor %}    
-    
-     {% for i in [0, 2, 4, 6] %}:
-        {% if guess[i] not in colours %}	
-        <h2>'Uzywasz niepoprawnych kolorow'</h2>
-        {% endif %}		
-     {% endfor %} 
+     {% if guess != [] %}
         
+        {% set guess_count = guess | length %}
+        {% set joinedList_count = joinedlist | length %}
+        {% if guess_count != joinedList_count %}
+        <h4>Twoja odpowiedz musi miec 4 cyfry i 4 litery. Przyklad: z4c5n6b9</h4> 
+        {% endif %}	
+       
+        {% if guess[1] not in numbers or guess[3] not in numbers or guess[5] not in numbers or guess[7] not in numbers %}	
+        <h4>Uzywasz niepoprawnych znakow</h4>
+        {% endif %}		
+          
+        {% if guess[0] not in colours or guess[2] not in colours or guess[4] not in colours or guess[6] not in colours %}	
+        <h4>Uzywasz niepoprawnych kolorow</h4>
+        {% endif %}	
+
+        <div>{{ guess }}</div>
+        <div>{{ joinedlist }}</div>   
+     {% endif %}
+     
      <!--odszyfrowana gra-->
      {% if guess == joinedlist %}
         <h2>'Sukces, zostales Mastermind!'</h2>
      {% endif %}
 
-    <p>{{ answer }}</p>
-
-{% else %}
 {% endblock content %}
