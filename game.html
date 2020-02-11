@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group"> 
+                <legend class="border-bottom">Powodzenia!</legend>
+                <div class="form-group">
+                    {{ form.answer_form.label(class="form-control-label") }}
+                    {{ form.answer_form(class="form-control form-control-lg") }}
+                </div>
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-outline-info") }}
+                </div>                
+            </fieldset>
+        </form>
+    </div>
+     <!-- koniec gry -->
+     {% if game_over == True %}
+     <h2>Koniec gry!</h2> 
+     {% endif %}
+     
+     <!--sprawdzenie poprawnosci kodu-->
+     {% if guess != [] %}
+        
+        {% set guess_count = guess | length %}
+        {% set joinedList_count = joinedlist | length %}
+        {% if guess_count != joinedList_count %}
+        <h4>Twoja odpowiedz musi miec 4 cyfry i 4 litery. Przyklad: z4c5n6b9</h4> 
+        {% endif %}	
+       
+        {% if guess[1] not in numbers or guess[3] not in numbers or guess[5] not in numbers or guess[7] not in numbers %}	
+        <h4>Uzywasz niepoprawnych znakow</h4>
+        {% endif %}		
+          
+        {% if guess[0] not in colours or guess[2] not in colours or guess[4] not in colours or guess[6] not in colours %}	
+        <h4>Uzywasz niepoprawnych kolorow</h4>
+        {% endif %}	
+
+     {% endif %}
+     {{ guess }}
+        
+     <!--odszyfrowana gra-->
+     {% if guess == joinedlist %}
+        <h2>'Sukces, zostales Mastermind!'</h2>
+     {% endif %}
+
+    <p>{{ answer }}</p>
+
+{% endblock content %}

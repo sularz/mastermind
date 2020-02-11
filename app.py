@@ -32,14 +32,16 @@ def about():
 
 @app.route("/game", methods=['GET', 'POST'])
 def game_ready():
-
+   
+    global numbers, colours
     guess = []
     
-    if guess is None:
+    if guess == []:
         form = AnswerForm()
-        guess = list(request.form.get('answer_form'))
+        guess = request.form.get('answer_form')
 
     else:
+        guess = list(guess)
         global game
         while game:
 
@@ -74,7 +76,7 @@ def game_ready():
                 else: #zła cyfra
                     answer.append("X")
         
-    return render_template('game.html', title='Game', form=form)
+    return render_template('game.html', title='Game', form=form, guess=guess, joinedlist=joinedlist, numbers=numbers, colours=colours)
 
 if __name__ == '__main__':
     app.run(debug=True)
