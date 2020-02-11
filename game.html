@@ -39,13 +39,13 @@
         {% endif %}	
 
      {% endif %}
-     {{ guess }}
-        
+     
+     <div>{{ guess }}</div>
+     <div>{{ joinedlist }}</div>
+     
      <!--odszyfrowana gra-->
      {% if guess == joinedlist %}
         <h2>'Sukces, zostales Mastermind!'</h2>
      {% endif %}
-
-    <p>{{ answer }}</p>
 
 {% endblock content %}

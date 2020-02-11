@@ -36,12 +36,10 @@ def game_ready():
     global numbers, colours
     guess = []
     
-    if guess == []:
+    if guess == [] or guess !=[]:
         form = AnswerForm()
-        guess = request.form.get('answer_form')
+        guess = list(request.form.get('answer_form'))
 
-    else:
-        guess = list(guess)
         global game
         while game:
 
