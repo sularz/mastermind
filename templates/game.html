@@ -24,23 +24,21 @@
      <!--sprawdzenie poprawnosci kodu-->
      {% if guess %}
         
-        {% set guess_count = guess | length %}
-        {% set joinedList_count = joinedlist | length %}
-        {% if guess_count != joinedList_count %}
+        {% if failure1 == True %}
         <h4>Twoja odpowiedz musi miec 4 cyfry i 4 litery. Przyklad: z4c5n6b9</h4> 
         {% endif %}	
        
-        {% if guess[1] not in numbers or guess[3] not in numbers or guess[5] not in numbers or guess[7] not in numbers %}	
+        {% if failure2 == True %}	
         <h4>Uzywasz niepoprawnych znakow</h4>
         {% endif %}		
           
-        {% if guess[0] not in colours or guess[2] not in colours or guess[4] not in colours or guess[6] not in colours %}	
+        {% if failure3 == True %}	
         <h4>Uzywasz niepoprawnych kolorow</h4>
         {% endif %}	
 
         <div>{{ guess }}</div>
-        <div>{{ joinedlist }}</div>   
-        <div>{{ answer }}</div> 
+        <div>{{ joinedlist }}</div>  
+        <div>{{ answer_list }}</div>  
      {% endif %}
      
      <!--odszyfrowana gra-->
