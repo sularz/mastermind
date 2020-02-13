@@ -13,13 +13,14 @@ colours = ["czerwony", "czarny", "zielony", "niebieski"]
 #numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 colour = random.sample(colours, 4) #losowe kolory
 joinedlist = colour
+all_answers = []
+# all_answers = []
 #str(colour)
 #list_from_colours = list(colour) #stworzenie z napisu listy znaków
 #joinedlist = list_from_colours + list_from_number #stworzenie ostatecznej listy np. ['b', 4, 'z', 7, 'n', 3, 'c', 9]
 #joinedlist[1], joinedlist[4] = joinedlist[4], joinedlist[1]
 #joinedlist[3], joinedlist[6] = joinedlist [6], joinedlist[3]
 #attempts = 0
-answer_list = []
 #game = True
 #joinedlist = list(map(str, joinedlist)) #konwertuję do stringów, potrzebne przy sprawdzaniu cyfr
 #print(joinedlist)
@@ -39,11 +40,13 @@ def game_ready():
     #global failure1, failure2, failure3
     #failure1=failure2=failure3=False
     guess = []
+    answer_list = []
     guess = request.form.get('answer')
-
     form = AnswerForm()
+    
     if form.validate_on_submit():
-        guess = list(form.answer.data)
+        guess = form.answer.data
+        guess = guess.split()
         
         #guess = list(guess)
         #if len(guess)==8:
@@ -68,7 +71,7 @@ def game_ready():
                      #   game = False
                     #print('Koniec gry')
 
-        global joinedlist, answer_list
+        global joinedlist
 
                         #sprawdzenie kolorów w odpowiedzi
         for i in range(4):
@@ -79,7 +82,15 @@ def game_ready():
                 answer_list.append("V")
             else: #zły kolor
                 answer_list.append("X")
-                                    
+        
+        global all_answers
+        if len(all_answers) < 10:
+            all_answers.append([guess, answer_list])
+        
+        if guess == joinedlist:
+            return render_template('winner.html', title='Winner')
+
+                      
                         #sprawdzenie cyfr w odpowiedzi
                 #for i in range(1, 8, 2):
                  #   if guess[i] == joinedlist[i]: #poprawna cyfra i prawidłowe miejsce
@@ -90,12 +101,12 @@ def game_ready():
                     #else: #zła cyfra
                      #   answer_list.append("X")"""
                 
-            #return render_template('table.html', title='Table', guess=guess, answer_list=answer_list, joinedlist=joinedlist)
+        #return render_template('table.html', title='Table', guess=guess, answer_list=answer_list, joinedlist=joinedlist, all_answers=all_answers)
     #else:
         #zła długość
         #failure1=True
-        return guess
-    return render_template('game.html', title='Game', form=form, guess=guess, answer_list=answer_list, joinedlist=joinedlist)
+        
+    return render_template('game.html', title='Game', form=form, guess=guess, answer_list=answer_list, joinedlist=joinedlist, all_answers=all_answers)
     
 if __name__ == '__main__':
     app.run(debug=True)   
