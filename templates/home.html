@@ -1,4 +1,22 @@
 {% extends "layout.html" %}
 {% block content %}
     <h1>Witamy w grze Mastermind!</h1>
+    
+     <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group"> 
+                <legend class="border-bottom"></legend>
+                <div class="form-group">
+                    <!-- przekierowanie do gry -->
+                    <a type="submit" class="btn btn-outline-info" href="{{ url_for('game_ready') }}">zagraj w grę</a>
+                </div> 
+                <div class="form-group">
+                    <!-- przekierowanie do zasad gry -->
+                    <a type="submit" class="btn btn-outline-info" href="{{ url_for('rules') }}">zasady gry</a>
+                </div>                
+            </fieldset>
+        </form>
+    </div>
+
 {% endblock content %}

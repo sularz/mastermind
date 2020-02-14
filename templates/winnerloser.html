@@ -1,20 +1,26 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Zasady gry</h1>
+    {% if winner == True %}
+    <h1>Wygrałeś! Jeeeeej!</h1>
+    {% else %}
+    <h1>Przegrałeś! Jeeeeej!</h1>
+    {% endif %}
 
     <div class="content-section">
         <form method="POST" action="">
+            {{ form.hidden_tag() }}
             <fieldset class="form-group"> 
-                <legend class="border-bottom">Mastermind</legend>
+                <legend class="border-bottom">Spróbuj jeszcze raz!</legend>
                 <div class="form-group">
                     <!-- przekierowanie do gry -->
-                    <a type="submit" class="btn btn-outline-info" href="{{ url_for('game_ready') }}">zagraj w grę</a>
-                </div> 
+                    <a type="submit" class="btn btn-outline-info" href="{{ url_for('game_ready') }}">zagraj jeszcze raz</a>
+                </div>
                 <div class="form-group">
-                    <!-- przekierowanie do zasad gry -->
+                    <!-- przekierowanie do strony głównej -->
                     <a type="submit" class="btn btn-outline-info" href="{{ url_for('home') }}">strona główna</a>
                 </div>                
             </fieldset>
         </form>
     </div>
+
 {% endblock content %}
