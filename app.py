@@ -5,12 +5,10 @@ from form import AnswerForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '2e4d7d7f4db059a95715e1683fd6755e'
-
-colours = ["czerwony", "czarny", "zielony", "niebieski"]
-colour = random.sample(colours, 4) #losowe kolory
-joinedlist = colour
 all_answers = []
-
+colors = ["czerwony", "czarny", "zielony", "niebieski"]
+color = random.choices(colors, k=4) #losowe kolory
+joinedlist = color
 
 @app.route("/")
 @app.route("/home")
@@ -54,10 +52,18 @@ def game_ready():
 
             if guess == joinedlist:
                 winner = True
+                all_answers = guess = joinedlist = answer_list = []
+                colors = ["czerwony", "czarny", "zielony", "niebieski"]
+                color = random.choices(colors, k=4) #losowe kolory
+                joinedlist = color
                 return render_template('winnerloser.html', title='WinnerLoser', winner=winner, form=form)
 
         if len(all_answers) == 10:
             winner = False
+            all_answers = guess = joinedlist = answer_list = []
+            colors = ["czerwony", "czarny", "zielony", "niebieski"]
+            color = random.choices(colors, k=4) #losowe kolory
+            joinedlist = color
             return render_template('winnerloser.html', title='WinnerLoser', winner=winner, form=form)
         
     return render_template('game.html', title='Game', form=form, guess=guess, answer_list=answer_list, joinedlist=joinedlist, all_answers=all_answers)
