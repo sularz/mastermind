@@ -9,7 +9,7 @@
    background-color:rgb(72, 90, 133);
  }
  
- h1, h4 {
+ h1, h3 {
    font-size:3em; 
    font-weight: 300;
    line-height:1em;
@@ -103,6 +103,42 @@
        transition-property: all;
    transition-timing-function: line;
  }
+ 
+.blue2 {
+  background-color: rgb(89, 89, 248);
+  float: left;
+  width: 20px;
+  height: 20px;
+  margin: 5px;
+  border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.green {
+  background: rgb(30, 122, 30);
+  float: left;
+  width: 20px;
+  height: 20px;
+  margin: 5px;
+  border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.black {
+  background: black;
+  float: left;
+  width: 20px;
+  height: 20px;
+  margin: 5px;
+  border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.red {
+  background: rgb(247, 80, 80);
+  float: left;
+  width: 20px;
+  height: 20px;
+  margin: 5px;
+  border: 1px solid rgba(0, 0, 0, .2);
+}
  
  @media (max-width: 800px) {
  .container td:nth-child(4),
