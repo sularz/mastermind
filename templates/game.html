@@ -15,29 +15,6 @@
             </fieldset>
         </form>
     </div>
-
-    <div>{{ guess }}</div>
-    <div>{{ joinedlist }}</div>  
-    <div>{{ answer_list }}</div>
-    <div>{{ all_answers }}</div>
-
-    {% if all_answers|length > 0 %}
-        <table class="container">
-            <thead>
-                <tr>
-                    <th><h4>Odpowiedzi</h4></th>
-                    <th><h4>Sprawdzenie</h4></th>
-                </tr>
-                <tbody>
-                    <tr>
-                        <td>{{ all_answers[(all_answers|length)-1][0]}}</td>
-                        <td>{{ all_answers[(all_answers|length)-1][1]}}</td>
-                    </tr>
-                </thead>
-                </tbody>
-        </table>
-    {% endif %}
-
     <div class="content-section">
         <form method="POST" action="">
             {{ form.hidden_tag() }}
@@ -49,6 +26,50 @@
             </fieldset>
         </form>
     </div>
-  
+
+    <div>{{ guess }}</div>
+    <div>{{ joinedlist }}</div>  
+    <div>{{ answer_list }}</div>
+    <div>{{ all_answers }}</div>
+
+    
+    {% if all_answers|length > 0 %}
+        <table class="container">
+            <thead>
+                <tr>
+                    <th><h5 class="name">Odpowiedzi</h5></th>
+                    <th><h5 class="name">Sprawdzenie</h5></th>
+                </tr>
+                <tbody>
+                    
+                        {% for x in all_answers %}
+                        <tr>
+                            <td>
+                            {% for color in x[0] %}
+                                {% if color == "czarny" %}
+                                    <div class="black"></div>
+                                {% elif color == "czerwony" %}
+                                    <div class="red"></div>
+                                {% elif color == "zielony" %}
+                                    <div class="green"></div>
+                                {% elif color == "niebieski" %}
+                                    <div class="blue2"></div>
+                                {% else %}
+                                    <div>WONSZ</div>
+                                {% endif %}
+                            {% endfor %}
+                            </td>
+                            <td>
+                            {% for color in x[1] %}
+                                <div>{{ color }}</div>
+                            {% endfor %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    
+                </thead>
+                </tbody>
+        </table>
+    {% endif %}
      
 {% endblock content %}
