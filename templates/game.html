@@ -8,6 +8,7 @@
                 <div class="form-group">
                     {{ form.answer.label(class="form-control-label") }}
                     {{ form.answer(class="form-control form-control-lg") }}
+                    <h4>Co mówi Chińczyk, patrząc na szybę? ... TOSHIBA!</h4>
                 </div>
                 <div class="form-group">
                     {{ form.submit(class="btn btn-outline-info") }}
@@ -26,25 +27,25 @@
             </fieldset>
         </form>
     </div>
-
-    <div>{{ guess }}</div>
-    <div>{{ joinedlist }}</div>  
-    <div>{{ answer_list }}</div>
-    <div>{{ all_answers }}</div>
-
+    <p>Znaczenie liter:</p>
+    <ul style="list-style-type:circle;">
+        <li>X → kolor nie znajduje się w kodzie</li>
+        <li>O → kolor znajduje się w kodzie i jest na dobrym miejscu</li>
+        <li>V → kolor znajduje się w kodzie, ale jest na złym miejscu</li>
+    </ul>
     
     {% if all_answers|length > 0 %}
         <table class="container">
             <thead>
                 <tr>
-                    <th><h5 class="name">Odpowiedzi</h5></th>
-                    <th><h5 class="name">Sprawdzenie</h5></th>
+                    <th><h5 class="text">Odpowiedzi</h5></th>
+                    <th><h5 class="text">Sprawdzenie</h5></th>
                 </tr>
                 <tbody>
                     
-                        {% for x in all_answers %}
+                        {% for x in all_answers | reverse %} <!-- odpowiedź na początku tabelki -->
                         <tr>
-                            <td>
+                            <td style="">
                             {% for color in x[0] %}
                                 {% if color == "czarny" %}
                                     <div class="black"></div>
@@ -59,9 +60,9 @@
                                 {% endif %}
                             {% endfor %}
                             </td>
-                            <td>
+                            <td style="text-align: center;">
                             {% for color in x[1] %}
-                                <div>{{ color }}</div>
+                                <div class="odp">{{ color }}</div>
                             {% endfor %}
                             </td>
                         </tr>

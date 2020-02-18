@@ -6,11 +6,12 @@
     <h1>Przegrałeś! Jeeeeej!</h1>
     {% endif %}
 
+    <h4>Co mówi informatyk, kiedy dostanie na urodziny pendrive'a? ... DZIĘKI ZA PAMIĘĆ!</h4>
     <div class="content-section">
         <form method="POST" action="">
             {{ form.hidden_tag() }}
-            <fieldset class="form-group"> 
-                <legend class="border-bottom">Spróbuj jeszcze raz!</legend>
+            <fieldset class="form-group">
+                <legend class="border-bottom"></legend>
                 <div class="form-group">
                     <!-- przekierowanie do gry -->
                     <a type="submit" class="btn btn-outline-info" href="{{ url_for('game_ready') }}">zagraj jeszcze raz</a>

@@ -2,11 +2,12 @@
 {% block content %}
     <h1>Witamy w grze Mastermind!</h1>
     
-     <div class="content-section">
+    <div class="content-section">
         <form method="POST" action="">
             {{ form.hidden_tag() }}
             <fieldset class="form-group"> 
                 <legend class="border-bottom"></legend>
+                <h4>Jaki jest ulubiony baton informatyka? ... 3 BIT!</h4>
                 <div class="form-group">
                     <!-- przekierowanie do gry -->
                     <a type="submit" class="btn btn-outline-info" href="{{ url_for('game_ready') }}">zagraj w grę</a>

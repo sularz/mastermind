@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
     <h1>Zasady gry</h1>
-
+    <h4>Jakie sny ma informatyk? ... NA JAVIE!</h4>
     <div class="content-section">
         <form method="POST" action="">
             <fieldset class="form-group"> 
-                <legend class="border-bottom">Mastermind</legend>
+                <legend class="border-bottom"></legend>
                 <div class="form-group">
                     <!-- przekierowanie do gry -->
                     <a type="submit" class="btn btn-outline-info" href="{{ url_for('game_ready') }}">zagraj w grę</a>
@@ -17,4 +17,20 @@
             </fieldset>
         </form>
     </div>
+    <p> Gracz (haker hehe) układa kod z czterech kolorów. Powtarzalność jest dozwolona - gracz może wybrać cztery te same kolory. 
+        Gracz stara się odgadnąć kod w 10 próbach. Grę kończy odgadnięcie kodu lub 10. nieudana próba.
+        Obok odpowiedzi gracza umieszczane są litery: 
+    </p>
+    <ul style="list-style-type:circle;">
+        <li>X → kolor nie znajduje się w kodzie</li>
+        <li>O → kolor znajduje się w kodzie i jest na dobrym miejscu</li>
+        <li>V → kolor znajduje się w kodzie, ale jest na złym miejscu</li>
+    </ul>
+    <p>Dozwolone kolory w grze to:</p>
+    <ul style="list-style-type:square;">
+        <li>niebieski</li>
+        <li>zielony</li>
+        <li>czarny</li>
+        <li>czerwony</li>
+    </ul>
 {% endblock content %}
